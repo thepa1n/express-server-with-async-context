@@ -1,4 +1,4 @@
-const { isProduction } = require('../config');
+const { IS_PRODUCTION } = require('../config');
 
 function errorMiddleware(err, req, res, next) {
   const productionResponse = {
@@ -15,7 +15,7 @@ function errorMiddleware(err, req, res, next) {
 
   return res
     .status(productionResponse.status)
-    .json(isProduction ? productionResponse : developmentResponse);
+    .json(IS_PRODUCTION ? productionResponse : developmentResponse);
 }
 
 module.exports = { errorMiddleware };

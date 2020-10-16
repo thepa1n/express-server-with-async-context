@@ -21,8 +21,8 @@ module.exports = {
       REQ_START_TIME: 'REQ_START_TIME'
     },
     HEADERS: {
-      TRACE_ID: 'x-uuid',
-      USER_ID: 'x-userid'
+      TRACE_ID: 'x-trace-id',
+      USER_ID: 'x-user-id'
     }
   }
 };

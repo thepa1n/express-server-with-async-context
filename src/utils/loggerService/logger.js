@@ -74,12 +74,15 @@ class Logger {
       }
     }
 
+    
+
     if (err) {
-      this.formattedLog.error = stringify({
+      this.formattedLog = {
+        ...this.formattedLog,
         errorCode: err.code,
         message: err.message,
         stack: err.stack
-      });
+      };
     }
 
     return this.formattedLog;
