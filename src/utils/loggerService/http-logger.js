@@ -1,4 +1,4 @@
-const Logger = require('./logger');
+const { Logger } = require('./logger');
 
 class HttpLogger extends Logger {
   // eslint-disable-next-line no-useless-constructor
@@ -29,4 +29,7 @@ class HttpLogger extends Logger {
   }
 }
 
-module.exports = HttpLogger;
+module.exports = {
+  httpLogger: new HttpLogger(),
+  HttpLogger,
+};

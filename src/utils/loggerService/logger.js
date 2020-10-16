@@ -48,7 +48,7 @@ class Logger {
     }
 
     if (duration) {
-      this.formattedLog.duration = `${duration} ms`;
+      this.formattedLog.duration = `+${duration} ms`;
     }
 
     if (req) {
@@ -142,4 +142,7 @@ class Logger {
   }
 }
 
-module.exports = Logger;
+module.exports = {
+  logger: new Logger(),
+  Logger,
+};

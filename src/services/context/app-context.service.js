@@ -1,4 +1,4 @@
-const ContextService = require('./context.service');
+const { ContextService } = require('./context.service');
 const { APP_CONTEXT } = require('./structures');
 
 class AppContextService extends ContextService {
@@ -6,19 +6,31 @@ class AppContextService extends ContextService {
     super(APP_CONTEXT.NAME);
   }
 
+  /**
+   * Статический метод для создания данного контекста
+   */
   static createContext() {
     return super.createContext(APP_CONTEXT.NAME);
   }
 
   /**
-   * Геттер для проверки есть ли этот контекст
+   * Геттер для проверки есть ли данный контекст
+   * 
+   * @returns {boolean} if exist returns => true
    */
   get isExist() {
     return super.checkExistContext(APP_CONTEXT.NAME);
   }
 
   /**
-   * Получаем структуру контекста все связные параметры
+   * Метод для получения структуры контекста
+   */
+  getStructure() {
+    return APP_CONTEXT;
+  }
+
+  /**
+   * Статический Геттер для получения структуры контекста
    */
   static get structure() {
     return APP_CONTEXT;
@@ -40,4 +52,4 @@ class AppContextService extends ContextService {
   }
 }
 
-module.exports = AppContextService;
+module.exports = { AppContextService };

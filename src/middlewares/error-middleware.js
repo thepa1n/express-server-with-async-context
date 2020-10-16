@@ -1,8 +1,5 @@
-const { logger } = require('../utils/loggerService');
 const { isProduction } = require('../config');
-// const { ERROR_MESSAGES, ERROR_STATUS, ERROR_CODES } = require('../');
 
-// eslint-disable-next-line no-unused-vars
 function errorMiddleware(err, req, res, next) {
   const productionResponse = {
     code: err.code || 1000,
@@ -21,12 +18,4 @@ function errorMiddleware(err, req, res, next) {
     .json(isProduction ? productionResponse : developmentResponse);
 }
 
-const handleErrorAsync = func => async (req, res, next) => {
-  try {
-    await func(req, res, next);
-  } catch (error) {
-    next(error);
-  }
-};
-
-module.exports = { errorMiddleware, handleErrorAsync };
+module.exports = { errorMiddleware };

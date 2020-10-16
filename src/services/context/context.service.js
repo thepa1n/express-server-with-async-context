@@ -51,4 +51,4 @@ class ContextService {
   }
 }
 
-module.exports = ContextService;
+module.exports = { ContextService };

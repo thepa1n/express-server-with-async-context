@@ -2,6 +2,6 @@ const ContextService = require('./context.service');
 const AppContextService = require('./app-context.service');
 
 module.exports = {
-  ContextService,
-  AppContextService
+  ...require('./context.service'),
+  ...require('./app-context.service'),
 };
