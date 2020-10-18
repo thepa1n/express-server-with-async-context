@@ -1,4 +1,4 @@
-const { name } = require(process.env.PWD + '/package.json')
+const { name } = require(__dirname + '/../../package.json');
 
 const config = {
   APPLICATION_NAME: name,
