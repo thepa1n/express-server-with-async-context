@@ -23,28 +23,16 @@ const getParamFromReqHeader = (headers, paramName, generateIfNotExist = false) =
 };
 
 const initAsyncContextMiddleware = (req, res, next) => {
-  const createdContext = AppContextService.createContext();
+  const APP_CONTEXT = new AppContextService();
+  const CONTEXT_STRUCTURE = APP_CONTEXT.getStructure();
 
-  // req и res - это event emitters. Мы хотим иметь доступ к CLS контексту внутри их коллбеков
-  createdContext.bind(req);
-  createdContext.bind(res);
+  const userID = getParamFromReqHeader(req.headers, CONTEXT_STRUCTURE.HEADERS.USER_ID);
+  const traceID = getParamFromReqHeader(req.headers, CONTEXT_STRUCTURE.HEADERS.TRACE_ID, true);
 
-  createdContext.run(() => {
-    const APP_CONTEXT = new AppContextService();
-    const CONTEXT_STRUCTURE = APP_CONTEXT.getStructure();
+  APP_CONTEXT.setContextVariable(CONTEXT_STRUCTURE.PARAMS.TRACE_ID, traceID);
+  APP_CONTEXT.setContextVariable(CONTEXT_STRUCTURE.PARAMS.USER_ID, userID);
 
-    const userID = getParamFromReqHeader(req.headers, CONTEXT_STRUCTURE.HEADERS.USER_ID);
-    const traceID = getParamFromReqHeader(
-      req.headers,
-      CONTEXT_STRUCTURE.HEADERS.TRACE_ID,
-      true
-    );
-
-    APP_CONTEXT.setContextVariable(CONTEXT_STRUCTURE.PARAMS.TRACE_ID, traceID);
-    APP_CONTEXT.setContextVariable(CONTEXT_STRUCTURE.PARAMS.USER_ID, userID);
-
-    next();
-  });
+  next();
 };
 
 module.exports = { initAsyncContextMiddleware };

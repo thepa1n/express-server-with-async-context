@@ -1,16 +1,8 @@
-const { createNamespace, getNamespace } = require('cls-hooked');
+const httpContext = require('http-request-context');
 
 class ContextService {
-  constructor(contextName) {
-    this.context = getNamespace(contextName);
-  }
-
-  /**
-   * Создание нового контекста
-   * @param {string} contextName название контекста
-   */
-  static createContext(contextName) {
-    return createNamespace(contextName);
+  constructor() {
+    this.context = httpContext;
   }
 
   /**
@@ -31,6 +23,13 @@ class ContextService {
   }
 
   /**
+   * Получить объект контекста
+   */
+  static getHttpContext() {
+    return httpContext;
+  }
+
+  /**
    * Cls-Hooked записывает все контексты в процесс
    */
   // eslint-disable-next-line class-methods-use-this
@@ -42,12 +41,12 @@ class ContextService {
    * Проверяем есть ли такой контекст true если есть
    * @param {string} contextName
    */
-  checkExistContext(contextName) {
-    const allContexts = this.getAllContexts();
-    if (!allContexts) {
-      return false;
+  checkExistContext() {
+    const allVariables = this.context.get();
+    if (typeof allVariables === 'object') {
+      return !!Object.keys(allVariables).length;
     }
-    return !!allContexts[contextName];
+    return false;
   }
 }
 

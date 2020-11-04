@@ -1,5 +1,7 @@
+const Logger = require('./logger');
+const HttpLogger = require('./http-logger');
 
 module.exports = {
-  ...require('./logger'),
-  ...require('./http-logger'),
+  logger: new Logger(),
+  httpLogger: new HttpLogger()
 };

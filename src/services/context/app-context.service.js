@@ -3,23 +3,16 @@ const { APP_CONTEXT } = require('./structures');
 
 class AppContextService extends ContextService {
   constructor() {
-    super(APP_CONTEXT.NAME);
-  }
-
-  /**
-   * Статический метод для создания данного контекста
-   */
-  static createContext() {
-    return super.createContext(APP_CONTEXT.NAME);
+    super();
   }
 
   /**
    * Геттер для проверки есть ли данный контекст
-   * 
+   *
    * @returns {boolean} if exist returns => true
    */
   get isExist() {
-    return super.checkExistContext(APP_CONTEXT.NAME);
+    return super.checkExistContext();
   }
 
   /**

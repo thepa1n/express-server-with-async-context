@@ -44,7 +44,11 @@ class Logger {
     }
 
     if (params) {
-      this.formattedLog.message += stringify(params);
+      if (typeof params === 'object') {
+        this.formattedLog.message += stringify(params);
+      } else {
+        this.formattedLog.message += ` ${params} `;
+      }
     }
 
     if (duration) {
@@ -73,8 +77,6 @@ class Logger {
         }
       }
     }
-
-    
 
     if (err) {
       this.formattedLog = {
@@ -121,7 +123,7 @@ class Logger {
     this.logger.info(
       this.formatting({
         message,
-        params,
+        params
       })
     );
   }
@@ -145,7 +147,4 @@ class Logger {
   }
 }
 
-module.exports = {
-  logger: new Logger(),
-  Logger,
-};
+module.exports = Logger;
